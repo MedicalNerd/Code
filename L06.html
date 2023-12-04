@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add Bootstrap CSS here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Bootstrap JS here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Option 1: Include in HTML -->  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
+
+    <title>Bootstrap Hero</title>
+    <style>
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+    
+      
+        .no-padding-container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .banner{
+            background-color: orangered;
+        }
+        .navbar{
+            background-color: #ff2400;
+            
+        }
+        .section{
+            background-color: rgb(20,83,101);
+        }
+        .btn-instructor{
+            background-color: blueviolet;
+            color:white;
+        }
+        .img-rounded-book{
+            background-color: blue;
+            border-radius: 50%;
+         
+        }
+        .section{
+            display:flex;
+            flex-direction: row;
+        }
+        .text{
+            margin-left: 20px;
+        }
+        
+        .icon img{
+            width: 50px;
+            height: 50px;
+        }
+        .courses{
+            background: orangered;
+        }
+        .course-text{
+            display: flex;
+            flex-direction: row;
+        }
+        .course-text p{
+           margin-left: 10px;
+        }
+        .title-card{
+            margin-bottom: 30px;
+        }
+       
+        .card-footer img{
+            margin-right: 5px;
+        }
+        .navicon{
+            display:none;
+            float: right;
+        }
+        
+        .text-muted-others{
+            margin-right: 15px;
+        }
+        .card-img-top {
+            height: 15rem
+        }
+        @media only screen and (min-width: 768px){
+            .navicon{
+                display:block;
+                float: right;
+            }
+            .text-muted-others{
+                margin-right: 5px;
+            }
+        }
+        
+     
+        
+     
+       
+     
+
+     
+      
+
+    </style>
+    <script>
+        window.onload = function() {
+            let bookmarks = document.querySelectorAll(".bookmark");
+            let bookmarkDetails = document.getElementById("bookmarkDetails");
+            bookmarks.forEach((item) => {
+                if (!item.classList.contains("remove-bookmark")) {
+                    if (!item.getAttribute("filled")) {
+                        item.setAttribute("filled", "no");
+                    }
+
+                    item.addEventListener("click", () => {
+                        if (item.getAttribute("filled") == "yes") {
+                            item.src = "images/bookmark.svg";
+                            item.setAttribute("data-bs-original-title", "Add to Bookmarks")
+                            item.setAttribute("filled", "no");
+                            let card = item.closest('.card');
+                            let cardClone = card.cloneNode(true);
+
+                            bookmarkDetails.innerHTML = '';
+
+              
+                            bookmarkDetails.appendChild(cardClone);
+
+                            // Open the offcanvas
+                            let offcanvas = new bootstrap.Offcanvas(document.getElementById('bookmarks'));
+                            offcanvas.show();
+                        } else {
+                            item.src = "images/bookmark-fill.svg";
+                            item.setAttribute("data-bs-original-title", "Remove from Bookmarks")
+                            item.setAttribute("filled", "yes");
+                        }
+                    })
+                }
+            })
+        }
+            
+    </script>
+</head>
+
+<body>
+<!-- 
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">My Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+                </ul>
+            </div>
+            <div class="navicon">
+                <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+    </nav> -->
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">My Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Courses
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <!-- Dynamically generate dropdown items based on your card names -->
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('UI/UX Design')">UI/UX Design</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('IOS Development')">IOS Development</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('HTML/CSS Front End Development')">HTML/CSS Front End Development</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Java Programming</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Android</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">JS</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Microsoft 365</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Python</a></li>
+                    <!-- Add more items if needed -->
+                </ul>
+            </li>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </ul>
+        </div>
+        <div class="navicon">
+            <img src="images/bell.svg" class="img-fluid" alt="Responsive image">
+            <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image" id="naviconDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <ul class="dropdown-menu" aria-labelledby="naviconDropdown">
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+
+    
+        <div class="container-fluid banner pt-5 pb-5">
+
+   
+            <!-- Add a container here for responsiveness -->
+            <div class="container">
+                <!-- Add a row here that will contain 2 columns -->
+                <div class="row justify-content-center">
+                    <!-- Add a column here for text -->
+                    <div class="col-sm-7 my-auto text-white">
+                        <h1>Welcome to<br>SOI Learning Portal</h1>
+                        <p>Expertly crafted course that best fit your<br>learning needs and preferences.</p>
+                        <button type="button" class="btn text-white bg-warning">Browse Courses</button>
+                        <button type="button" class="btn text-white btn-instructor">Be an Instructor</button>
+                    </div>     
+    
+                    <!-- Add a column here for the image -->
+                    <div class="col-sm-3 ">
+                        <img src="images/PngItem_1576334.png" class="img-fluid" alt="Responsive image">
+                    </div>
+                </div>    
+            </div>        
+    
+        </div>
+ 
+        <div class="container-fluid section pt-3 pb-3">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <!-- Add a column here for text -->
+  
+                    <div class="col-sm-3  text-white">
+                       <div class="section">
+                            <div class="icon">
+                                <img src="images/laptop_chromebook_FILL0_wght400_GRAD0_opsz24.svg" class="img-rounded-book" alt="Cinque Terre">
+                            </div>
+                            <div class="text">
+                                <div><strong>158 online courses</strong></div>
+                                <p>Enjoy a varity of fresh topics</p>
+                            </div>
+                        </div> 
+                    </div>
+                 
+                    <div class="col-sm-3 text-white">
+                        <div class="section">
+                             <div class="icon">
+                                 <img src="images/person_add_FILL0_wght400_GRAD0_opsz24.svg" class="img-rounded-book" alt="Cinque Terre">
+                             </div>
+                             <div class="text">
+                                 <div><strong>Expert instructions</strong></div>
+                                 <p>Find the right insturctor for you</p>
+                             </div>
+                         </div> 
+                     </div>
+                     <div class="col-sm-3 text-white">
+                        <div class="section">
+                             <div class="icon">
+                                 <img src="images/time1.svg" class="img-rounded-book" alt="Cinque Terre">
+                             </div>
+                             <div class="text">
+                                 <div><strong>Lifetime access</strong></div>
+                                 <p>Learn on your schedule</p>
+                             </div>
+                         </div> 
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid courses pt-5 pb-5">
+            <div class="row justify-content-center">
+                <h1 class="title-card text-center text-white">Our Products</h1>
+        
+                <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+        
+                        <!-- Carousel Item 1 -->
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <!-- Course Card 1 -->
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/UIUX.jpg" class="card-img-top" alt="UI/UX Design">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>UI/UX Design</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">3h 00m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">Stan Lee</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <!-- Course Card 2 -->
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/ios-development.png" class="card-img-top" alt="IOS Development">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>IOS Development</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">3h 30m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">Steve Jobs</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <!-- Course Card 3 -->
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/screen-html5-devs.jpg" class="card-img-top" alt="IOS Development">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>HTML/CSS Front End Development</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">5h 30m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">House</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <!-- Course Card 4 -->
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/Logo 6.png" class="card-img-top" alt="IOS Development">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>Java Programming</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">2h 30m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">Bruce Wayne</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <!-- Carousel Item 2 -->
+                        <div class="carousel-item">
+                            <div class="row">
+                                <!-- Add cards for Carousel Item 2 if needed -->
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/Python.png" class="card-img-top" alt="IOS Development">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>Python Coding</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">2h 30m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">Danial</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/js.png" class="card-img-top" alt="IOS Development">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>Introduction to React JS</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">3h 30m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">Kana Arima</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/HeroHomepage_2880x1200.jpg" class="card-img-top" alt="IOS Development">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>Android Development</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">1h 40m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">Andy Tao</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6 mt-3">
+                                    <div class="card h-100" style="background: orange;">
+                                        <img src="images/Microsoft_365.jpg" class="card-img-top" alt="IOS Development">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white"><strong>Introduction to Microsft 365 Excel PP Word</strong></h5>
+                                            <div class="mt-3">
+                                                <img src="images/schedule_FILL0_wght400_GRAD0_opsz24.svg">
+                                                <span class="card-text text-white">13h 30m</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <img style="margin-bottom: 5px;" src="images/person_FILL0_wght400_GRAD0_opsz24.svg">
+                                            <span class="card-text text-white">Bill Gates</span>
+                                            <img id="bookmark-IOS" data-bs-toggle="offcanvas" data-bs-target="#bookmarks" target="ux-ui-design" data-toggle="tooltip" title="Add to Bookmarks" class="card-bookmark bookmark" style="margin-top: 5px; float: right" src="images/bookmark.svg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <!-- Add more carousel items if needed -->
+        
+                    </div>
+        
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer py-3 bg-light">
+            <div class="container">
+                <span class="text-muted">© 2023 Republic Polytechnic</span>
+                <span class="text-muted-others" style="float:right">Terms</span>
+                <span class="text-muted-others" style="float:right">Feedback</span>
+                <span class="text-muted-others" style="float:right">Support</span>
+                <span class="text-muted-others" style="float:right">Privacy</span>
+                
+            </div>
+            
+        </footer>
+    
+        <!-- Add Bootstrap JS here -->
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="bookmarks">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Bookmark Details</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div id="bookmarkDetails">
+                    <!-- Content will be dynamically filled based on the selected bookmark -->
+                </div>
+            </div>
+        </div>
+    
+        <!-- ... Your existing body content ... -->
+    
+</body>
+
+</html> 
