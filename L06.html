@@ -80,6 +80,14 @@
         .card-img-top {
             height: 15rem
         }
+        .custom-carousel-control {
+        width: 40px; 
+        height: 40px; 
+        background-color: orange;
+        border-radius: 15px;
+        margin-top: 200px;
+        
+        }
         @media only screen and (min-width: 768px){
             .navicon{
                 display:block;
@@ -193,8 +201,10 @@
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
         </ul>
+        
         </div>
-        <div class="navicon">
+        <div style="margin-left: auto;" class="navicon">
+            <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image">
             <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image">
         </div>
         </div>
@@ -436,11 +446,11 @@
                     </div>
         
                     <!-- Carousel Controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
