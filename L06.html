@@ -13,6 +13,10 @@
     <!-- Option 1: Include in HTML -->  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="tags.js"></script>
+    
 
     <title>Bootstrap Hero</title>
     <style>
@@ -81,11 +85,11 @@
             height: 15rem
         }
         .custom-carousel-control {
-        width: 40px; 
-        height: 40px; 
-        background-color: orange;
-        border-radius: 15px;
-        margin-top: 200px;
+            width: 40px; 
+            height: 40px; 
+            background-color: orange;
+            border-radius: 15px;
+            margin-top: 200px;
         
         }
         @media only screen and (min-width: 768px){
@@ -97,6 +101,14 @@
             }
         }
         
+        .offline {
+            border-radius: 50%;
+            border: 3px solid grey;
+        }
+
+        .green {
+            border: 3px solid green;
+        }
      
         
      
@@ -155,57 +167,60 @@
                     })
                 }
             })
+        
+            document.getElementById("pfp").addEventListener("click", () => {
+                console.log("asd")
+                document.getElementById("pfp").classList.toggle("green")
+            })
         }
+
+        
             
     </script>
 </head>
 
 <body>
-<!-- 
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">My Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </form>
-                </ul>
-            </div>
-            <div class="navicon">
-                <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image">
-            </div>
-        </div>
-    </nav> -->
-
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Navbar</a>
+        <a class="navbar-brand" href="#">SOI Learning Portal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"><span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Courses</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">HTML</a></li>
+                    <li><a class="dropdown-item" href="#">CSS</a></li>
+                    <li><a class="dropdown-item" href="#">PHP</a></li>
+                    <li><a class="dropdown-item" href="#">JavaScript</a></li>
+                    <li><a class="dropdown-item" href="#">Python</a></li>
+                    <li><a class="dropdown-item" href="#">Java</a></li>
+                    <li><a class="dropdown-item" href="#">iOS</a></li>
+                    <li><a class="dropdown-item" href="#">React</a></li>
+                </ul>
+            </li>
             <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Search" id="searchbox" aria-label="Search">
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
         </ul>
-        
         </div>
-        <div style="margin-left: auto;" class="navicon">
-            <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image">
-            <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image">
+        <div class="navicon dropdown">
+            <a href="" class="nav-link px-1" data-bs-toggle="dropdown" data-bs-target="#bookmarks"><img id="a" src="images/bell.svg" class="img-fluid" alt="Responsive image">
+
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" style="width: 250px">
+                <li style="border-bottom: 1px solid white;"><span class="text-center dropdown-item-text">2 Unread Notification(s)</span></li>
+                <li><a class="dropdown-item" style=" white-space: normal" href="#">New instructor has joined</a></li>
+                <li><a class="dropdown-item disabled" style=" white-space: normal" href="#">New message sent</a></li>
+            </ul>
+        </div>
+        <div class="navicon">
+            <img id="pfp" src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="offline img-fluid" alt="Responsive image">
         </div>
         </div>
     </nav>
