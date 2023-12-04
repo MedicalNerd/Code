@@ -73,9 +73,7 @@
         }
         .navicon{
             display:none;
-            float: right;
         }
-        
         .text-muted-others{
             margin-right: 15px;
         }
@@ -85,7 +83,6 @@
         @media only screen and (min-width: 768px){
             .navicon{
                 display:block;
-                float: right;
             }
             .text-muted-others{
                 margin-right: 5px;
@@ -104,6 +101,8 @@
     </style>
     <script>
         window.onload = function() {
+            let bookmarkId = 0;
+
             let bookmarks = document.querySelectorAll(".bookmark");
             let bookmarkDetails = document.getElementById("bookmarkDetails");
             bookmarks.forEach((item) => {
@@ -117,21 +116,33 @@
                             item.src = "images/bookmark.svg";
                             item.setAttribute("data-bs-original-title", "Add to Bookmarks")
                             item.setAttribute("filled", "no");
-                            let card = item.closest('.card');
-                            let cardClone = card.cloneNode(true);
 
-                            bookmarkDetails.innerHTML = '';
-
-              
-                            bookmarkDetails.appendChild(cardClone);
-
-                            // Open the offcanvas
-                            let offcanvas = new bootstrap.Offcanvas(document.getElementById('bookmarks'));
-                            offcanvas.show();
+                            if (item.getAttribute("target")) {
+                                let target = document.getElementById(item.getAttribute("target"));
+                                target.remove();
+                            }
+                            
                         } else {
                             item.src = "images/bookmark-fill.svg";
                             item.setAttribute("data-bs-original-title", "Remove from Bookmarks")
                             item.setAttribute("filled", "yes");
+
+                            let card = item.closest('.col-md-3');
+                            let cardClone = card.cloneNode(true);
+                            cardClone.setAttribute("id", bookmarkId);
+                            item.setAttribute("target", bookmarkId);
+                            bookmarkId++;
+
+                            bookmarkDetails.appendChild(cardClone);
+
+                            // bookmarkDetails.innerHTML = '';
+
+              
+                           
+
+                            // Open the offcanvas
+                            // let offcanvas = new bootstrap.Offcanvas(document.getElementById('bookmarks'));
+                            // offcanvas.show();
                         }
                     })
                 }
@@ -177,23 +188,6 @@
             <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Courses
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- Dynamically generate dropdown items based on your card names -->
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('UI/UX Design')">UI/UX Design</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('IOS Development')">IOS Development</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('HTML/CSS Front End Development')">HTML/CSS Front End Development</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Java Programming</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Android</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">JS</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Microsoft 365</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="filterCard('Java Programming')">Python</a></li>
-                    <!-- Add more items if needed -->
-                </ul>
-            </li>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-primary" type="submit">Search</button>
@@ -201,13 +195,7 @@
         </ul>
         </div>
         <div class="navicon">
-            <img src="images/bell.svg" class="img-fluid" alt="Responsive image">
-            <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image" id="naviconDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <ul class="dropdown-menu" aria-labelledby="naviconDropdown">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Log</a></li>
-                </ul>
+            <img src="images/person_FILL0_wght400_GRAD0_opsz24.svg" class="img-fluid" alt="Responsive image">
         </div>
         </div>
     </nav>
@@ -473,13 +461,13 @@
         </footer>
     
         <!-- Add Bootstrap JS here -->
-        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="bookmarks">
+        <div class="offcanvas offcanvas-bottom h-auto" tabindex="-1" id="bookmarks">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title">Bookmark Details</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <div id="bookmarkDetails">
+                <div class="row" id="bookmarkDetails">
                     <!-- Content will be dynamically filled based on the selected bookmark -->
                 </div>
             </div>
